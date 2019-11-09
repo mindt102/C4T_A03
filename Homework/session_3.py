@@ -39,5 +39,3 @@ def pascal_triangle(n):
     else:
         return "Input an integer"
 
-print(pascal_triangle(1.1))
-print(factorial(1.1))
