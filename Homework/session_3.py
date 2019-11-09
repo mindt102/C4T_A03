@@ -27,8 +27,6 @@ def pascal_triangle(n):
             return "Input an integer larger than 0"
         elif n == 1:
             line = [1]
-        elif n == 2:
-            line = [1,1]
         else:
             line = []
             previous_line = pascal_triangle(n-1)
@@ -38,4 +36,3 @@ def pascal_triangle(n):
         return line
     else:
         return "Input an integer"
-
