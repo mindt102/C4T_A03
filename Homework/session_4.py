@@ -32,12 +32,13 @@ def same_head_tail(input_str):
     if len(input_str) == 0:
         return 0
     else:
-        counter = 0
-        for i in range(len(input_str)):
-            substring = input_str[i:]
-            if substring[0] == substring[-1]:
-                counter += 1
-        return counter + same_head_tail(input_str[1:]) 
+        valid_substring = same_head_tail(input_str[1:]) + same_head_tail(input_str[:-1]) - same_head_tail(input_str[1:-1])
+        if input_str[0] == input_str[-1]:
+            valid_substring += 1
+        return valid_substring
+
+
+
 
 
 
