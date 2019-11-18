@@ -1,9 +1,9 @@
-def quick_sort(array = list):
-    if len(array) == 1 or len(array) == 0:
-        return array
+def recursive_function(array,first_index,last_index):
+    if first_index == last_index:
+        return []
     else:
-        pivot_index  = 0
-        current_index = len(array) - 1
+        pivot_index  = first_index
+        current_index = last_index-1
         delta = -1
         while current_index != pivot_index:
             if array[pivot_index] > array[current_index] and pivot_index < current_index:
@@ -15,9 +15,30 @@ def quick_sort(array = list):
                 pivot_index, current_index = current_index, pivot_index
                 delta = -1
             current_index += delta
-        lower = quick_sort(array[:pivot_index])
-        higher = quick_sort(array[pivot_index+1:])
-        return lower + [array[pivot_index]] + higher
+
+        return recursive_function(array,first_index,pivot_index) + [array[pivot_index]] + recursive_function(array,pivot_index+1,last_index) 
+
+
+def quick_sort(array = list):
+    return recursive_function(array,0,len(array))
+    # if len(array) == 1 or len(array) == 0:
+    #     return array
+    # else:
+    #     pivot_index  = 0
+    #     current_index = len(array) - 1
+    #     delta = -1
+    #     while current_index != pivot_index:
+    #         if array[pivot_index] > array[current_index] and pivot_index < current_index:
+    #             array[pivot_index], array[current_index] = array[current_index],array[pivot_index]
+    #             pivot_index, current_index = current_index, pivot_index
+    #             delta = 1
+    #         if array[pivot_index] < array[current_index] and pivot_index > current_index:
+    #             array[pivot_index], array[current_index] = array[current_index],array[pivot_index]
+    #             pivot_index, current_index = current_index, pivot_index
+    #             delta = -1
+    #         current_index += delta
+
+    #     return quick_sort(array[:pivot_index]) + [array[pivot_index]] + quick_sort(array[pivot_index+1:]) 
 
 def first_capital(input_str):
     if len(input_str) == 0:
