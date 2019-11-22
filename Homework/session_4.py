@@ -53,13 +53,17 @@ def same_head_tail(input_str):
     if len(input_str) == 0:
         return 0
     else:
-        valid_substring = same_head_tail(input_str[1:]) + same_head_tail(input_str[:-1]) - same_head_tail(input_str[1:-1])
-        if input_str[0] == input_str[-1]:
-            valid_substring += 1
-        return valid_substring
+        # valid_substring = same_head_tail(input_str[1:]) + same_head_tail(input_str[:-1]) - same_head_tail(input_str[1:-1])
+        # if input_str[0] == input_str[-1]:
+        #     valid_substring += 1
+        valid_substring = 0
+        for c in input_str:
+            if input_str[0] == c:
+                valid_substring += 1
+        return valid_substring + same_head_tail(input_str[1:])
 
 
-
+print(same_head_tail("abcab"))
 
 
 
