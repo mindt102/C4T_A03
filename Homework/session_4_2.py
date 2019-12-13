@@ -5,11 +5,17 @@ def maximum_candy(money, price, wrapper):
         bought_candy = money // price
         if bought_candy < wrapper:
             return bought_candy
-        else:
-            new_money = (bought_candy//wrapper) * price     # Change wrappers from eaten candies into money     
-            bought_candy += maximum_candy(new_money,price,wrapper)
+        else:    
+            bought_candy += maximum_candy_plus(wrapper,bought_candy)
             return bought_candy
-    
+def maximum_candy_plus(wrapper,remaining_wrapper):
+    if remaining_wrapper < wrapper:
+        return 0
+    else:
+        new_candy = remaining_wrapper // wrapper
+        remaining_wrapper = new_candy + remaining_wrapper % wrapper
+        return new_candy + maximum_candy_plus(wrapper,remaining_wrapper)
+
 def minimum_square(N, M):
     if N <= 1 or M <= 1:
         return (N*M)
@@ -25,3 +31,5 @@ def minimum_square(N, M):
             else:
                 loop = False 
         return 1 + minimum_square(width - max_square_length, max_square_length) + minimum_square(width,length - max_square_length)
+
+print(maximum_candy(16,2,2))
