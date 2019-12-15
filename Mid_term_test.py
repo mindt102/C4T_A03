@@ -72,17 +72,23 @@ def print_maze(maze):
 # print_maze(maze)
 # print(maze_runner(maze))
 
-# ''' Câu 5 '''
-# def posible_journey(start,destination):
-#     sx, sy = start
-#     dx, dy = destination
-#     if sx == dx and sy == dy:
-#         return True
-#     if sx > dx or sy > dy:
-#         return False
-#     return posible_journey([sx,sx + sy],destination) or posible_journey([sx + sy,sy],destination)
+''' Câu 5 '''
+def possible_journey(start, destination):
+    sx, sy = start
+    dx, dy = destination
+    if sx == dx and sy == dy:
+        return True
+    if sx*sy > 0 and (abs(sx) > abs(dx) or abs(sy) > abs(dy)):
+        return False
+    if sx == sy and sx == 0:
+        return False
+    if sx == 0:
+        return possible_journey([sx + sy, sy],[dx,dy])
+    if sy == 0:
+        return possible_journey([sx, sx + sy],[dx,dy])
+    return possible_journey([sx + sy, sy],[dx,dy]) or possible_journey([sx, sx + sy],[dx,dy])
 
-# print(posible_journey([0,1],[1,1]))
+# print(possible_journey([-5,9],[11,4]))
 ''' Câu 6 '''
 import math
 
@@ -99,35 +105,32 @@ def square_sum_recursion(x,n,start):
         return 1
     ways = 0
     for i in range(start,x+1):
-        # print("i: {}".format(i))
         if pow(i,n) > x:
             return ways
         ways += square_sum_recursion(x - pow(i,n), n,i+1)
     return ways
+
 # for i in range(100):
 #     ways = square_sum(i,2) 
 #     if  ways > 3:
 #         print("Number: {}, ways: {}".format(i,ways)) 
 
-# ''' Câu 7 '''
-# def minimum_move(n):
-#     move = find_minimum(n,0,1,n*2)
-#     return move
-
-# def find_minimum(n, postion, step,min_move):
-#     if postion + step == n or postion - step == n:
-#         return 1
-#     if step >= n*2:
-#         return min_move
+''' Câu 7 '''
+def find_min_move(n):   # Main function
+    if n == 0:              
+        return 0
+    n = abs(n)                  
+    largest_min_move = find_min_move(n-1) + 2
+    return find_min_move_recursion(n, 0, 1, largest_min_move)
     
-    
-    # if move >= min_move:
-    #     move = 1 + find_minimum(n, postion - step,step + 1,min_move)
-    #     if move >= min_move:
-    #         return min_move
-    #     move = 1 + find_minimum(n, postion - step,step + 1,move)    
-    # move = 1 + find_minimum(n, postion + step,step + 1,move)
+def find_min_move_recursion(n, position, step, largest_min_move):
+    if position == n:
+        return step - 1
+    if step >= largest_min_move:
+        return largest_min_move
+    else:
+        return min( find_min_move_recursion(n, position + step, step + 1, largest_min_move), find_min_move_recursion(n, position - step, step + 1,largest_min_move) )
 
-    # return move
-
-# print(minimum_move(2))
+# for i in range(1,21):
+# i = 25
+# print("{}. move: {}".format(i,find_min_move(i)))
