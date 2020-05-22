@@ -14,12 +14,15 @@ def sum_n_number(n):
     
 ''' Câu 3 '''
 def convert_to_binary(n):
-    result = ""
-    while n >= 2:
-        result += str(n % 2)
+    result = 0
+    i = 0
+    while n != 0:
+        result += (n % 2)*pow(10,i)
         n = n // 2
-    result += str(n)
-    return int(result[::-1])
+        i += 1
+    return result
+
+print(convert_to_binary(17))
 
 ''' Câu 4 '''
 def maze_runner(maze): # Main function
@@ -132,5 +135,6 @@ def find_min_move_recursion(n, position, step, largest_min_move):
         return min( find_min_move_recursion(n, position + step, step + 1, largest_min_move), find_min_move_recursion(n, position - step, step + 1,largest_min_move) )
 
 # for i in range(1,21):
-# i = 25
-# print("{}. move: {}".format(i,find_min_move(i)))
+i = 12
+print("{}. move: {}".format(i,find_min_move(i)))
+
